@@ -70,7 +70,7 @@ Complex Complex::operator-(const Complex& other) const {
 
 // Overload * operator
 Complex Complex::operator*(const Complex& other) const {
-    Real realPart = Real(real_.getValue() * other.real_.getValue() - imaginary_.getValue() * other.imaginary_.getValue());
+    Real realPart = Real((real_ * other.real_).getValue() - (imaginary_ * other.imaginary_).getValue());
     Imaginary imaginaryPart = Imaginary(real_.getValue() * other.imaginary_.getValue() + imaginary_.getValue() * other.real_.getValue());
     return Complex(realPart, imaginaryPart);
 }
