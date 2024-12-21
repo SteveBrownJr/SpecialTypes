@@ -3,30 +3,30 @@
 
 int main()
 {
-    Complex c1(3, 4), c2(1, -2);
-
-    std::cout << "Complex Number 1: " << c1 << "\n";
-    std::cout << "Complex Number 2: " << c2 << "\n";
-
-    Complex sum = c1 + c2;
-    std::cout << "Sum: " << sum << "\n";
-
-    Complex diff = c1 - c2;
-    std::cout << "Difference: " << diff << "\n";
-
-    Complex product = c1 * c2;
-    std::cout << "Product: " << product << "\n";
-
     try {
+        Real real1(3.0);
+        Imaginary imaginary1(4.0);
+        Complex c1(real1, imaginary1);
+
+        Real real2(1.0);
+        Imaginary imaginary2(2.0);
+        Complex c2(real2, imaginary2);
+
+        Complex sum = c1 + c2;
+        Complex difference = c1 - c2;
+        Complex product = c1 * c2;
         Complex quotient = c1 / c2;
+
+        std::cout << "c1: " << c1 << "\n";
+        std::cout << "c2: " << c2 << "\n";
+        std::cout << "Sum: " << sum << "\n";
+        std::cout << "Difference: " << difference << "\n";
+        std::cout << "Product: " << product << "\n";
         std::cout << "Quotient: " << quotient << "\n";
     }
-    catch (const std::runtime_error& e) {
-        std::cerr << e.what() << "\n";
+    catch (const std::exception& e) {
+        std::cerr << "Error: " << e.what() << "\n";
     }
-
-    std::cout << "Conjugate of c1: " << c1.conjugate() << "\n";
-    std::cout << "Magnitude of c1: " << c1.magnitude() << "\n";
 
     return 0;
 }

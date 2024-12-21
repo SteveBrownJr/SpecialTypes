@@ -1,60 +1,56 @@
 #pragma once
 #include <iostream>
+#include <string>
+#include <stdexcept>
 
+// Strong type for Real part
 class Real {
-public:
-    double value;
-    explicit Real(double v) : value(v) {}
+    private:
+        double value_;
+
+    public:
+        explicit Real(double value) : value_(value) {}
+        double getValue() const;
+
+        Real operator+(const Real& other) const;
+        Real operator-(const Real& other) const;
+        Real operator*(const Real& other) const;
+        Real operator/(const Real& other) const;
 };
 
+// Strong type for Imaginary part
 class Imaginary {
+private:
+    double value_;
 public:
-    double value;
-    explicit Imaginary(double v) : value(v) {}
+    explicit Imaginary(double value) : value_(value) {}
+    double getValue() const;
+
+    Imaginary operator+(const Imaginary& other) const;
+    Imaginary operator-(const Imaginary& other) const;
+    Imaginary operator*(const Imaginary& other) const;
+    Imaginary operator/(const Imaginary& other) const;
 };
 
+// Complex number class
 class Complex {
 private:
-
-
-    Real real;
-    Imaginary imag;
-
+    Real real_;
+    Imaginary imaginary_;
 public:
-    // Constructors
-    Complex() : real(Real(0)), imag(Imaginary(0)) {}
-    Complex(double r, double i) : real(Real(r)), imag(Imaginary(i)) {}
+    Complex(const Real& real, const Imaginary& imaginary)
+        : real_(real), imaginary_(imaginary) {}
 
-    // Getter and Setter
-    double getReal() const { return real.value; }
-    double getImag() const { return imag.value; }
-    void setReal(double r) { real = Real(r); }
-    void setImag(double i) { imag = Imaginary(i); }
+    Real getReal() const;
+    Imaginary getImaginary() const;
 
-    // Operátorok, nehogy valami olyan mûveletet tudjunk végezni amit nem szabadna!
     Complex operator+(const Complex& other) const;
     Complex operator-(const Complex& other) const;
     Complex operator*(const Complex& other) const;
     Complex operator/(const Complex& other) const;
-    bool operator==(const Complex& other) const;
-    bool operator!=(const Complex& other) const;
-    Complex conjugate() const;
-    double magnitude() const;
-    
-
     friend std::ostream& operator<<(std::ostream& os, const Complex& c) {
-        os << c.real.value;
-        if (c.imag.value >= 0) os << " + " << c.imag.value << "i";
-        else os << " - " << -c.imag.value << "i";
+        os << c.real_.getValue() << (c.imaginary_.getValue() >= 0 ? " + " : " - ") << std::abs(c.imaginary_.getValue()) << "i";
         return os;
-    }
-
-    friend std::istream& operator>>(std::istream& is, Complex& c) {
-        std::cout << "Enter real part: ";
-        is >> c.real.value;
-        std::cout << "Enter imaginary part: ";
-        is >> c.imag.value;
-        return is;
     }
 };
 
