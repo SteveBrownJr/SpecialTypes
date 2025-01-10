@@ -1,13 +1,11 @@
-#include "DistanceCalculator.h"
+#include "StrongTypeExample/Point.h"
 #include <stdio.h>
 
 
 int main(){
-    X_Coordinate x2(2.0d);
-    Y_Coordinate y2(2.0d);
-    X_Coordinate x1(2.0d);
-    Y_Coordinate y1(4.0d);
-    double d = distance(x2,x1,y2,y1);
+    Point a(X_Coordinate(2.0d),Y_Coordinate(2.0d));
+    Point b(X_Coordinate(4.0d),Y_Coordinate(2.0d));
+    double d = a.distanceFrom(b);
     printf("%lf\n",d);
     return 0;
 }
